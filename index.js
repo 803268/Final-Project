@@ -39,41 +39,44 @@ $(document).ready(function(){
                        
               } else {
                  
-                    Username = $("#username").val();
-                   Password = $("#password").val();
-                  Email = $("#email").val();
-                  PhoneNumber = $("#phoneNumber").val();
-                  Class = [];
-                  Period = [];
-                  Grade = [];
-                  Person [];
+                   let Username = $("#username").val();
+                  let Password = $("#password").val();
+                 let Email = $("#email").val();
+                let  PhoneNumber = $("#phoneNumber").val();
+                 let Class = [];
+                 let Period = [];
+                let  Grade = [];
+                 
                   $("input.class").each(function(index,oneClassBox) {
                       
                       Class.push(
-                          oneClassBox.val()
+                          $(this).val()
                       );
                   });
                   $("input.period").each(function(index,onePeriodBox) {
                       
                       Period.push(
-                          oneClassBox.val()
+                          $(this).val()
                       );
                   });
                   $("input.grade").each(function(index,oneGradeBox) {
                       
                       Grade.push(
-                          oneGradeBox.val()
+                          $(this).val()
                       );
+                      
                   });
                  person =  JSON.parse(localStorage.getItem("Person"))
                   
-                  person.push({
+                  person = {
                      Username: Username,
                      Password: Password,
                      Email: Email,
                      PhoneNumber: PhoneNumber,
-                     Grades: Grades
-                  });
+                     Grade: Grade,
+                    Class: Class,
+                      Period: Period
+                  };
                  
                  localStorage.setItem("Person",JSON.stringify(person))
              }
@@ -82,14 +85,12 @@ $(document).ready(function(){
      
      $("button#loginEnter").click(function(e){
          e.preventDefault();
-        person =  JSON.parse(localStorage.getItem("Person"))
-       Grades = (localStorage.getItem("Grades"))
-      for  ( i = 0 ; i< person.length ; i++) {
-         console.log(person[i]);
-          console.log(Password);
+       // person =  JSON.parse(localStorage.getItem("Person"))
+      //Person = (localStorage.getItem("Person"))
+   
            Username = $("#username").val();
                    Password = $("#password").val();
-          if (Password == person[i].Password && Username == person[i].Username) {
+         
               
              console.log("approved")
             $("button#gradeSave").show();
@@ -100,20 +101,16 @@ $(document).ready(function(){
             $("table#gradesTable").show();
             $("button#register").hide();
             $("button#login").hide();
-         }
+         
           
-          else {
-               alert("ID not found");
-          }
-          
-      }
+       
        
          
          
      });
      
       $("button#gradeSave").click(function(){
-            Grades = $("table#gradesTable").val();
+            Grade = $("input.grade").val();
           localStorage.setItem("Grades",Grades);
  });
      
