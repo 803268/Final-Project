@@ -114,7 +114,9 @@ $(document).ready(function(){
             $("table#gradesTable").show();
             $("button#register").hide();
             $("button#login").hide();
-         
+            $("input.grade").show();
+                    $("input.period").show();
+                    $("input.class").show();
             console.log("approved")
          }).catch(function(error){
                console.log(error);
