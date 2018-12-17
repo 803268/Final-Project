@@ -36,7 +36,7 @@ app.post('/login', function(req,res){
          
           if (Password == users[i].Password && Username == users[i].Username) {
              
-             let login = {Username,Password};
+             let login = users[i];
              res.send(login);
               
               console.log("approved")
@@ -47,16 +47,6 @@ app.post('/login', function(req,res){
                alert("ID not found");
           }
           
-          let login = {Username,Password};
-         
-          axios.post('/login',user)
-         .then(function(response) {
-               console.log(response.data);
-              
-           })
-            .catch(function(error){
-               console.log(error);
-           });
           
       }
 
@@ -66,10 +56,7 @@ app.post('/login', function(req,res){
              for  ( i = 0 ; i< users.length ; i++) {
           
         console.log(users[i]);
-        console.log(users[i].Password);
-        console.log (users[1].Grade);
-        console.log (users[1].Period);
-        console.log (users[1].Class);
+       
        
         Grade = req.body.Grade;
            Period = req.body.Period;
@@ -78,7 +65,9 @@ app.post('/login', function(req,res){
          
          
           if (Password == users[i].Password && Username == users[i].Username) {
-             
+             users[i].Grade = Grade;
+             users[i].Period = Period;
+             user[i].Class = Class; 
              let save = {Grade,Period,Class};
              res.send(save);
               
@@ -90,16 +79,7 @@ app.post('/login', function(req,res){
                alert("Content not found");
           }
           
-          let login = {Username,Password};
-         
-          axios.post('/save',user)
-         .then(function(response) {
-               console.log(response.data);
-              
-           })
-            .catch(function(error){
-               console.log(error);
-           });
+          
           
       }
              
