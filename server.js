@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-var data = express();
+
 
 app.use(express.static('public'));
 app.use(express.json()); 
@@ -8,16 +8,11 @@ app.use(express.json());
 
  var users = [];
    
-    app.get('/',function(req,res){
-   res.render('index', {
-    title: 'Users',
-       users: users
-});
-});
+   
 
     
     app.post('/register', function(req,res){
-     
+     // .post function for registering
             console.log('SUCCESS');
         
    users.push(req.body);
@@ -28,7 +23,7 @@ app.use(express.json());
 
 
 app.post('/login', function(req,res){
-                    
+         // .post function for logging into account           
      for  ( i = 0 ; i< users.length ; i++) {
           
          console.log(users[i]);
@@ -67,7 +62,48 @@ app.post('/login', function(req,res){
 
      
 });                           
-                                 
+    app.post('/save', function(req,res) {
+             for  ( i = 0 ; i< users.length ; i++) {
+          
+        console.log(users[i]);
+        console.log(users[i].Password);
+        console.log (users[1].Grade);
+        console.log (users[1].Period);
+        console.log (users[1].Class);
+       
+        Grade = req.body.Grade;
+           Period = req.body.Period;
+            Class = req.body.Class;
+           
+         
+         
+          if (Password == users[i].Password && Username == users[i].Username) {
+             
+             let save = {Grade,Period,Class};
+             res.send(save);
+              
+              console.log("approved")
+             
+         }
+          
+          else {
+               alert("Content not found");
+          }
+          
+          let login = {Username,Password};
+         
+          axios.post('/save',user)
+         .then(function(response) {
+               console.log(response.data);
+              
+           })
+            .catch(function(error){
+               console.log(error);
+           });
+          
+      }
+             
+             });                            
                                  
                                                                  
 app.listen(3000, () => { console.log('Server Started...');
